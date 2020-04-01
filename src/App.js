@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 // child components
 import UsersContainer from "./components/UsersContainer";
@@ -13,6 +13,16 @@ const App = ()=> {
   //   users: []
   // };
   const [users, setUsers] = useState([])
+  
+  //ComponentDidMount
+  //ComponentDidUpdate
+  useEffect(() => {
+    getUsers()
+    console.log("I'm rendering for the firsttime (componentDidMount)")
+  }, [users]) //with an empty array, it will let it render only once. Otherwise, it will
+  //be an infinite loop of rendering. Makes sure it renders only once
+  //will take care of the rerendering part
+  
   
   // componentDidMount() {
   //   this.getUsers();
@@ -66,7 +76,7 @@ const App = ()=> {
         // this.setState({
         //   users: [...this.state.users, user] // this.state.users.concat(users)
         // });
-        setUsers([...this.state.users, user])
+        setUsers([users, user])
       });
     };
     
@@ -78,7 +88,7 @@ const App = ()=> {
       // this.setState({
       //   users: this.state.users.filter(user => user.id !== id)
       // });
-      setUsers(this.state.users.filter(user => user.id !== id))
+      setUsers(users.filter(user => user.id !== id))
     });
   };
 

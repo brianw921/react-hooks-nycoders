@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 
 //styling
@@ -7,6 +7,13 @@ import { Card, Container, Button } from "react-bootstrap";
 export default function DisplayUser(props){
   //access props and display each element on its own div
 
+  //componentWillUnmount
+  useEffect(() => {
+    // console.log("User mounting")
+    return () => {
+      console.log("Deleting user", props.user)
+    }
+  }, [])
     const { deleteUser, user } = props;
 
     return (
